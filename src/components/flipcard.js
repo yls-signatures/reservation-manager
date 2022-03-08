@@ -45,7 +45,7 @@ export default function Flipcard({ docs }) {
   return (
     <>
       <NotifyToast show={show} setShow={handleAlert} order={order} />
-      <div className="d-flex flex-lg-row flex-column gap-3 align-items-center justify-content-center">
+      <div className="d-flex flex-lg-row flex-column gap-5 align-items-center justify-content-center">
         {docs &&
           docs?.map(({ id, data }, index) => (
             <div className="flip-card-container" key={id}>
@@ -54,7 +54,7 @@ export default function Flipcard({ docs }) {
                 onClick={() => toggleActive(index)}
               >
                 <div className="front">
-                  <img src={data?.filepath} />
+                  <img src={data?.filepath} alt={`${data.name}_image`} />
                 </div>
                 <div className="back">
                   <button

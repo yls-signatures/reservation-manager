@@ -2,7 +2,16 @@ import { Toast, ToastContainer } from "react-bootstrap"
 
 export default function NotifyToast({ show, setShow, order }) {
   return (
-    <ToastContainer position="bottom-center" className="p-3">
+    <ToastContainer
+      className="p-3"
+      style={{
+        position: "fixed",
+        zIndex: 1,
+        left: "50%",
+        bottom: 0,
+        transform: "translateX(-50%)",
+      }}
+    >
       <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
         <Toast.Header closeButton={false}>
           <div className="d-flex ms-auto gap-4">

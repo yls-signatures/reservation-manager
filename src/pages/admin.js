@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore"
 import { firestore, drinkDb } from "../firebase/firebaseApp"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Loader from "../components/loader"
 
 export default function Admin() {
@@ -26,7 +26,7 @@ export default function Admin() {
       setLoading(false)
     })
     return unsubscribe
-  }, [])
+  }, [q])
 
   const handleClear = () => {
     docs.forEach(async (element) => {
