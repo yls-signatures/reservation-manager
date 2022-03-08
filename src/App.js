@@ -1,4 +1,4 @@
-import { collection, query, getDocs } from "firebase/firestore"
+import { collection, query, getDocs, where } from "firebase/firestore"
 import { firestore } from "./firebase/firebaseApp"
 import { useState, useEffect } from "react"
 import { drinkDb } from "./firebase/firebaseApp"
@@ -18,14 +18,15 @@ function App() {
       let newDocs = []
       try {
         setLoading(true)
-        const orderQuery = query(collection(firestore, drinkDb))
-        const querySnapshot = await getDocs(orderQuery)
-        if (!querySnapshot.empty) {
-          querySnapshot.forEach((doc) => {
-            newDocs.push(doc.data())
+        const querySnapshot = await getDocs(collection(firestore, drinkDb))
+        querySnapshot.forEach((doc) => {
+          newDocs.push({
+            id: doc.id,
+            data: doc.data(),
           })
-          setDocs(newDocs)
-        }
+        })
+        setDocs(newDocs)
+        console.log(newDocs)
       } catch (error) {
         console.error(error)
         setError(error)
@@ -42,10 +43,10 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Link to="admin">admin</Link>
+          {/* <Link to="/admin">admin</Link> */}
           <Hero />
           <Flipcard docs={docs} />
-          <h3 className="my-5 text-center">and more coming soon...</h3>{" "}
+          {/* <h3 className="my-5 text-center">and more coming soon...</h3>{" "} */}
         </>
       )}
     </>

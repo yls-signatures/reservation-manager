@@ -14,4 +14,3 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig)
 export const firestore = getFirestore()
 export const drinkDb = "drink"
-export const orderDb = "orders"
