@@ -9,7 +9,7 @@ export default function Hero() {
   })
   return (
     <div className="text-center mt-5">
-      <h1 className="my-5">VP EXCLUSIVE</h1>
+      <h1 className="vp-title">VP EXCLUSIVE</h1>
       {/* <animated.div style={{ ...props, zIndex: -1, position: "relative" }}>
         <img src="kaws-with-shadow-cropped.png" className="rounded-3 kaws-image my-5" />
       </animated.div> */}

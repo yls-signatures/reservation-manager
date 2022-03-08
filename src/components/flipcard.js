@@ -1,10 +1,13 @@
-import { setDoc, doc, updateDoc, increment } from "firebase/firestore"
+import { doc, updateDoc, increment } from "firebase/firestore"
 import { useState, useEffect } from "react"
-import { drinkDb, orderDb } from "../firebase/firebaseApp"
+import { drinkDb } from "../firebase/firebaseApp"
 import { firestore } from "../firebase/firebaseApp"
+import NotifyToast from "./nofitytoast"
 
 export default function Flipcard({ docs }) {
   const [isActive, setIsActive] = useState([])
+  const [show, setShow] = useState(false)
+  const [order, setOrder] = useState("")
 
   // Intialize an array that keep track of flipped card
   useEffect(() => {
@@ -25,34 +28,44 @@ export default function Flipcard({ docs }) {
     setIsActive(newArray)
   }
 
-  const handleOrder = async (id) => {
+  const handleOrder = async (id, name) => {
     const drinkRef = doc(firestore, drinkDb, id)
     await updateDoc(drinkRef, {
       quantity: increment(1),
     })
+    handleAlert(true)
+    console.log(name)
+    setOrder(name.substring(0, 1).toUpperCase() + name.substring(1))
+  }
+
+  const handleAlert = (boolean) => {
+    setShow(boolean)
   }
 
   return (
-    <div className="d-flex flex-lg-row flex-column gap-3 align-items-center justify-content-center">
-      {docs &&
-        docs?.map(({ id, data }, index) => (
-          <div className="flip-card-container" key={id}>
-            <div
-              className={isActive[index] ? "flip-card flipped" : "flip-card"}
-              onClick={() => toggleActive(index)}
-            >
-              <div className="front">
-                <img src={data?.filepath} />
-              </div>
-              <div className="back">
-                <button
-                  className="text-capitalize btn btn-outline-dark order-btn"
-                  onClick={() => handleOrder(id)}
-                >{`order ${data?.name}`}</button>
+    <>
+      <NotifyToast show={show} setShow={handleAlert} order={order} />
+      <div className="d-flex flex-lg-row flex-column gap-3 align-items-center justify-content-center">
+        {docs &&
+          docs?.map(({ id, data }, index) => (
+            <div className="flip-card-container" key={id}>
+              <div
+                className={isActive[index] ? "flip-card flipped" : "flip-card"}
+                onClick={() => toggleActive(index)}
+              >
+                <div className="front">
+                  <img src={data?.filepath} />
+                </div>
+                <div className="back">
+                  <button
+                    className="text-capitalize btn btn-outline-dark order-btn"
+                    onClick={() => handleOrder(id, data.name)}
+                  >{`order ${data?.name}`}</button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-    </div>
+          ))}
+      </div>
+    </>
   )
 }

@@ -46,7 +46,9 @@ function App() {
           {/* <Link to="/admin">admin</Link> */}
           <Hero />
           <Flipcard docs={docs} />
-          {/* <h3 className="my-5 text-center">and more coming soon...</h3>{" "} */}
+          <h6 className="text-center" style={{ marginTop: 200, marginBottom: 30 }}>
+            ENJOY
+          </h6>
         </>
       )}
     </>
