@@ -25,12 +25,12 @@ function App() {
 
   // Fetch all drinks
   useEffect(() => {
-    const queryForDocuments = async () => {
+    async function queryForDocuments() {
       let newDocs = []
       try {
         setLoading(true)
         const querySnapshot = await getDocs(collection(firestore, drinkDb))
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(doc => {
           newDocs.push({
             id: doc.id,
             data: doc.data(),
@@ -42,6 +42,8 @@ function App() {
       } finally {
         setLoading(false)
       }
+
+      // console.log("fetching menu")
     }
     queryForDocuments()
   }, [])

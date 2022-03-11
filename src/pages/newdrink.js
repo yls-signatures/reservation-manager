@@ -14,7 +14,7 @@ export default function NewDrink() {
   const [feedback, setFeedback] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault()
     const { name, filepath } = form
     setLoading(true)
@@ -49,16 +49,16 @@ export default function NewDrink() {
               <input
                 type="text"
                 className="form-control"
-                onChange={(event) => setForm({ ...form, name: event.target.value })}
+                onChange={event => setForm({ ...form, name: event.target.value })}
               />
-              <div className="form-text">First 3 char will be used as Symbol.</div>
+              <div className="form-text">Capitalization doesn't matter</div>
             </div>
             <div className="mb-3">
               <label className="form-label">Image Path</label>
               <input
                 type="text"
                 className="form-control"
-                onChange={(event) => setForm({ ...form, filepath: event.target.value })}
+                onChange={event => setForm({ ...form, filepath: event.target.value })}
               />
               <div className="form-text">/mojito.png</div>
             </div>
@@ -66,8 +66,7 @@ export default function NewDrink() {
               type="submit"
               onClick={handleSubmit}
               disabled={loading}
-              className="btn btn-primary"
-            >
+              className="btn btn-primary">
               Submit
             </button>
           </form>

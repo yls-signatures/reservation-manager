@@ -13,10 +13,11 @@ export default function Flipcard({ docs }) {
   useEffect(() => {
     let initArray = new Array(docs.length).fill(false)
     setIsActive(initArray)
+    // console.log("setting up flipcard")
   }, [docs])
 
   // Toggle active for corresponding card
-  const toggleActive = (index) => {
+  const toggleActive = index => {
     let newArray = []
     for (let i = 0; i < isActive.length; i++) {
       if (index === i) {
@@ -34,11 +35,11 @@ export default function Flipcard({ docs }) {
       quantity: increment(1),
     })
     handleAlert(true)
-    console.log(name)
+    // console.log(name)
     setOrder(name.substring(0, 1).toUpperCase() + name.substring(1))
   }
 
-  const handleAlert = (boolean) => {
+  const handleAlert = boolean => {
     setShow(boolean)
   }
 
@@ -51,16 +52,16 @@ export default function Flipcard({ docs }) {
             <div className="flip-card-container" key={id}>
               <div
                 className={isActive[index] ? "flip-card flipped" : "flip-card"}
-                onClick={() => toggleActive(index)}
-              >
+                onClick={() => toggleActive(index)}>
                 <div className="front">
                   <img src={data?.filepath} alt={`${data.name}_image`} />
                 </div>
                 <div className="back">
                   <button
                     className="text-capitalize btn btn-outline-dark order-btn"
-                    onClick={() => handleOrder(id, data.name)}
-                  >{`order ${data?.name}`}</button>
+                    onClick={() =>
+                      handleOrder(id, data.name)
+                    }>{`order ${data?.name}`}</button>
                 </div>
               </div>
             </div>
